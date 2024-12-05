@@ -10,17 +10,17 @@ export const Login = () => {
   const { mutate } = useLogin();
   const navigate = useNavigate();
 
-  // Agar foydalanuvchi tizimga kirgan bo'lsa uni "/app"ga yo'naltirish
   if (Cookies.get("accessToken")) {
     return <Navigate to="/app" replace={true} />;
   }
 
-  // Formani yuborish funksiyasi
   const onSubmit = (data: loginType) => {
     console.log("Submitted Data:", data);
 
     mutate(data, {
-      onSuccess: () => {
+      
+      onSuccess: (res) => {
+        Cookies.set("Token",res.token)
         message.success("Login Successfully");
         navigate("/app", { replace: true });
       },
@@ -42,7 +42,7 @@ export const Login = () => {
       }}
     >
       <Form
-        onFinish={handleSubmit(onSubmit)} // handleSubmit react-hook-form dan ishlatildi
+        onFinish={handleSubmit(onSubmit)}
         name="login"
         layout="vertical"
         style={{
@@ -61,7 +61,7 @@ export const Login = () => {
             Sign in
           </legend>
         </fieldset>
-        {/* Telefon raqam */}
+   
         <Form.Item
           label="Phone number"
           name="phone_number"
@@ -82,7 +82,6 @@ export const Login = () => {
           />
         </Form.Item>
 
-        {/* Parol */}
         <Form.Item
           label="Password"
           name="password"
@@ -103,7 +102,6 @@ export const Login = () => {
           />
         </Form.Item>
 
-        {/* Yuborish tugmasi */}
         <Button
           type="primary"
           htmlType="submit"

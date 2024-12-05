@@ -1,20 +1,42 @@
 import React from "react";
-import { HomeOutlined } from "@ant-design/icons";
+import { AlignLeftOutlined, DatabaseOutlined, FileOutlined, ProductOutlined } from '@ant-design/icons';
+
 import { AntdIconProps } from "@ant-design/icons/lib/components/AntdIcon";
+import { nanoid } from "nanoid";
 
 export interface LayoutType {
   label: string;
   icon: React.ForwardRefExoticComponent<
     Omit<AntdIconProps, "ref"> & React.RefAttributes<HTMLSpanElement>
   >;
-  key: string;
+  path: string;
+  id: string
 }
 
 export const LayoutData: LayoutType[] = [
   {
-    label: "Category List",
-    key: "/app/category",
-    icon: HomeOutlined,
+    id: nanoid(),
+    label: "Category",
+    path: "category",
+    icon: AlignLeftOutlined,
+  
   },
-
+  {
+    id: nanoid(),
+    label: "Sub Category",
+    path: "/app/sub-category",
+    icon: DatabaseOutlined,
+  },
+  {
+    id: nanoid(),
+    label: "Brand",
+    path: "/app/brand",
+    icon: FileOutlined,
+  },
+  {
+    id: nanoid(),
+    label: "Product",
+    path: "/app/product",
+    icon: ProductOutlined
+  }
 ];
